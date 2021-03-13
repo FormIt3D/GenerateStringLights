@@ -58,11 +58,11 @@ FormItPlugins.GenerateStringLights.initializeUI = function()
     document.getElementById(bulbRadiusInputID).value = 0.1667;
 
     // create the fixture cable/housing height input element
-    contentContainer.appendChild(new FormIt.PluginUI.TextInputModule('Cable or Housing Height: ', 'cableOrHousingHeightModule', 'inputModuleContainer', cableOrHousingHeightInputID, FormIt.PluginUI.convertValueToDimensionString).element);
+    contentContainer.appendChild(new FormIt.PluginUI.TextInputModule('Housing Height: ', 'cableOrHousingHeightModule', 'inputModuleContainer', cableOrHousingHeightInputID, FormIt.PluginUI.convertValueToDimensionString).element);
     document.getElementById(cableOrHousingHeightInputID).value = 0.08333;
 
     // create the fixture cable/housing radius input element
-    contentContainer.appendChild(new FormIt.PluginUI.TextInputModule('Cable or Housing Radius: ', 'cableOrHousingRadiusModule', 'inputModuleContainer', cableOrHousingRadiusInputID, FormIt.PluginUI.convertValueToDimensionString).element);
+    contentContainer.appendChild(new FormIt.PluginUI.TextInputModule('Housing Radius: ', 'cableOrHousingRadiusModule', 'inputModuleContainer', cableOrHousingRadiusInputID, FormIt.PluginUI.convertValueToDimensionString).element);
     document.getElementById(cableOrHousingRadiusInputID).value = 0.0625;
 
     // create the curve properties subheader
