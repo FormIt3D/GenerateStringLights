@@ -169,10 +169,14 @@ FormItPlugins.GenerateStringLights.getSelectionBasics = async function()
 
     if (currentSelection.length === 0)
     {
-        let message = "Select a line or an arc to begin.";
+        let message = "Select a line or an arc to generate string lights along.";
         await FormIt.UI.ShowNotification(message, FormIt.NotificationType.Information, 0);
         console.log("\n" + message);
         return false;
+    }
+    else
+    {
+        return true;
     }
 }
 
@@ -430,7 +434,7 @@ FormItPlugins.GenerateStringLights.getOperationType = function(args)
     let bIsSplineType = booleanReduce(FormItPlugins.GenerateStringLights.arrays.bIsOnSplineArray);
 
     // get the specified arc bulge
-    let arcBulge = FormIt.PluginUtils.currentUnits(args.arcBulge);
+    let arcBulge = args.arcBulge;
 
     if (bIsArcCircleType === true)
     {
@@ -1005,7 +1009,14 @@ FormItPlugins.GenerateStringLights.execute = async function()
     success = true;
 
     // execute the get selection basics routine
-    await FormItPlugins.GenerateStringLights.getSelectionBasics();
+    let isSomethingSelected = await FormItPlugins.GenerateStringLights.getSelectionBasics();
+
+    // if nothing is selected, skip the rest of the steps
+    // a message indicating nothing was selected is already handled in the getSelectionBasics function
+    if (!isSomethingSelected)
+    {
+        return;
+    }
 
     // get the object IDs of the selected geometry
     let selectedObjectIDs = await FormItPlugins.GenerateStringLights.getObjectIDsBySelection(currentSelection);
