@@ -3,8 +3,6 @@
     "PluginDescription": "Create architectural string lights given a selected line or arc.",
     "PluginType": "Panel",
     "Scripts": [
-        "PLUGINLOCATION/StringLightGenerator.js",
-        "https://formit3d.github.io/FormItWorkflowPlugins/Utils.js",
         "https://formit3d.github.io/FormItExamplePlugins/SharedPluginFiles/PluginUtils18_0.js"
     ]
     ,"Panel": "PLUGINLOCATION/index.html",
