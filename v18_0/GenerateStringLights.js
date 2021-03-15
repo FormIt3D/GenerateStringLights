@@ -839,7 +839,7 @@ FormItPlugins.GenerateStringLights.drawSingleLightFixture = async function(place
     //console.log("\nDrawing the typical light fixture...");
 
     // take the placement point and move it down to represent a cable or bulb housing length
-    let verticalCableOrHousingLength = FormIt.PluginUtils.currentUnits(args.verticalCableOrHousingLength);
+    let verticalCableOrHousingLength = args.verticalCableOrHousingLength;
     let verticalCableBottomPointPos = await WSM.Geom.Point3d(placementPoint["x"], placementPoint["y"], placementPoint["z"] - verticalCableOrHousingLength);
 
     //console.log("Bottom point of vertical cable " + JSON.stringify(verticalCableBottomPointPos));
@@ -868,7 +868,7 @@ FormItPlugins.GenerateStringLights.drawSingleLightFixture = async function(place
     // create bulbs
     async function createBulbs(args)
     {
-        let bulbRadius = FormIt.PluginUtils.currentUnits(args.bulbRadius);
+        let bulbRadius = args.bulbRadius;
         //console.log("Bulb radius: " + bulbRadius);
         let bulbCount = args.bulbsPerFixture;
 
@@ -992,14 +992,14 @@ FormItPlugins.GenerateStringLights.execute = async function()
     // package up the inputs from the HTML page into a single object
     let args = 
     {
-    "fixtureCount": FormIt.PluginUtils.currentUnits(await FormIt.StringConversion.StringToLinearValue((document.getElementById(fixtureCountInputID).value))).second,
-    "bulbsPerFixture": FormIt.PluginUtils.currentUnits(await FormIt.StringConversion.StringToLinearValue((document.getElementById(bulbsPerFixtureInputID).value))).second,
-    "bulbRadius": FormIt.PluginUtils.currentUnits(await FormIt.StringConversion.StringToLinearValue((document.getElementById(bulbRadiusInputID).value))).second,
-    "verticalCableOrHousingLength": FormIt.PluginUtils.currentUnits(await FormIt.StringConversion.StringToLinearValue((document.getElementById(cableOrHousingHeightInputID).value))).second,
-    "verticalCableOrHousingRadius":FormIt.PluginUtils.currentUnits(await FormIt.StringConversion.StringToLinearValue((document.getElementById(cableOrHousingRadiusInputID).value))).second,
-    "cableFacetCount" : FormIt.PluginUtils.currentUnits(await FormIt.StringConversion.StringToLinearValue((document.getElementById(catenaryCableFacetCountInputID).value))).second,
-    "cableRadius": FormIt.PluginUtils.currentUnits(await FormIt.StringConversion.StringToLinearValue((document.getElementById(catenaryCableRadiusInputID).value))).second,
-    "arcBulge": FormIt.PluginUtils.currentUnits(await FormIt.StringConversion.StringToLinearValue((document.getElementById(catenaryCableBulgeInputID).value))).second
+    "fixtureCount": Number(document.getElementById(fixtureCountInputID).value),
+    "bulbsPerFixture": Number(document.getElementById(bulbsPerFixtureInputID).value),
+    "bulbRadius": await FormIt.PluginUtils.currentUnits(await FormIt.StringConversion.StringToLinearValue((document.getElementById(bulbRadiusInputID).value))).second,
+    "verticalCableOrHousingLength": await FormIt.PluginUtils.currentUnits(await FormIt.StringConversion.StringToLinearValue((document.getElementById(cableOrHousingHeightInputID).value))).second,
+    "verticalCableOrHousingRadius": await FormIt.PluginUtils.currentUnits(await FormIt.StringConversion.StringToLinearValue((document.getElementById(cableOrHousingRadiusInputID).value))).second,
+    "cableFacetCount" : Number(document.getElementById(catenaryCableFacetCountInputID).value),
+    "cableRadius": await FormIt.PluginUtils.currentUnits(await FormIt.StringConversion.StringToLinearValue((document.getElementById(catenaryCableRadiusInputID).value))).second,
+    "arcBulge": await FormIt.PluginUtils.currentUnits(await FormIt.StringConversion.StringToLinearValue((document.getElementById(catenaryCableBulgeInputID).value))).second
     }
 
     // by default, rebuild the arc so it's smoother
