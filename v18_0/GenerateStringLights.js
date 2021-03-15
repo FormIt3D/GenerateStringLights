@@ -20,7 +20,7 @@ let catenaryCableFacetCountInputID = 'catenaryCableFacetCountInput';
 let catenaryCableRadiusInputID = 'catenaryCableRadiusInput';
 let catenaryCableBulgeInputID = 'catenaryCableBulgeInput';
 
-FormItPlugins.GenerateStringLights.initializeUI = function()
+FormItPlugins.GenerateStringLights.initializeUI = async function()
 {
     // create an overall container for all objects that comprise the "content" of the plugin
     // everything except the footer
@@ -55,15 +55,15 @@ FormItPlugins.GenerateStringLights.initializeUI = function()
 
     // create the bulb radius input element
     contentContainer.appendChild(new FormIt.PluginUI.TextInputModule('Bulb Radius: ', 'cableOrHousingRadiusModule', 'inputModuleContainer', bulbRadiusInputID, FormIt.PluginUI.convertValueToDimensionString).element);
-    document.getElementById(bulbRadiusInputID).value = 0.1667;
+    document.getElementById(bulbRadiusInputID).value = await FormIt.StringConversion.LinearValueToString(0.1667);
 
     // create the fixture cable/housing height input element
     contentContainer.appendChild(new FormIt.PluginUI.TextInputModule('Housing Height: ', 'cableOrHousingHeightModule', 'inputModuleContainer', cableOrHousingHeightInputID, FormIt.PluginUI.convertValueToDimensionString).element);
-    document.getElementById(cableOrHousingHeightInputID).value = 0.08333;
+    document.getElementById(cableOrHousingHeightInputID).value = await FormIt.StringConversion.LinearValueToString(0.08333);
 
     // create the fixture cable/housing radius input element
     contentContainer.appendChild(new FormIt.PluginUI.TextInputModule('Housing Radius: ', 'cableOrHousingRadiusModule', 'inputModuleContainer', cableOrHousingRadiusInputID, FormIt.PluginUI.convertValueToDimensionString).element);
-    document.getElementById(cableOrHousingRadiusInputID).value = 0.0625;
+    document.getElementById(cableOrHousingRadiusInputID).value = await FormIt.StringConversion.LinearValueToString(0.0625);
 
     // create the curve properties subheader
     let curvePropertiesSubheader = contentContainer.appendChild(document.createElement('p'));
@@ -76,11 +76,11 @@ FormItPlugins.GenerateStringLights.initializeUI = function()
 
     // create the catenary cable radius input element
     contentContainer.appendChild(new FormIt.PluginUI.TextInputModule('Cable Radius: ', 'catenaryCableRadiusModule', 'inputModuleContainer', catenaryCableRadiusInputID, FormIt.PluginUI.convertValueToDimensionString).element);
-    document.getElementById(catenaryCableRadiusInputID).value = 0.0208333333;
+    document.getElementById(catenaryCableRadiusInputID).value = await FormIt.StringConversion.LinearValueToString(0.0208333333);
 
     // create the cable bulge input element
     contentContainer.appendChild(new FormIt.PluginUI.TextInputModule('Arc Bulge (new arcs only): ', 'catenaryCableBulgeModule', 'inputModuleContainer', catenaryCableBulgeInputID, FormIt.PluginUI.convertValueToDimensionString).element);
-    document.getElementById(catenaryCableBulgeInputID).value = 2;
+    document.getElementById(catenaryCableBulgeInputID).value = await FormIt.StringConversion.LinearValueToString(2);
 
     // create the button to execute the generation
     contentContainer.appendChild(new FormIt.PluginUI.Button('Generate String Lights', FormItPlugins.GenerateStringLights.execute).element);
@@ -992,14 +992,14 @@ FormItPlugins.GenerateStringLights.execute = async function()
     // package up the inputs from the HTML page into a single object
     let args = 
     {
-    "fixtureCount": Number(document.getElementById(fixtureCountInputID).value),
-    "bulbsPerFixture": Number(document.getElementById(bulbsPerFixtureInputID).value),
-    "bulbRadius": await FormIt.PluginUtils.currentUnits(await FormIt.StringConversion.StringToLinearValue((document.getElementById(bulbRadiusInputID).value))).second,
-    "verticalCableOrHousingLength": await FormIt.PluginUtils.currentUnits(await FormIt.StringConversion.StringToLinearValue((document.getElementById(cableOrHousingHeightInputID).value))).second,
-    "verticalCableOrHousingRadius": await FormIt.PluginUtils.currentUnits(await FormIt.StringConversion.StringToLinearValue((document.getElementById(cableOrHousingRadiusInputID).value))).second,
-    "cableFacetCount" : Number(document.getElementById(catenaryCableFacetCountInputID).value),
-    "cableRadius": await FormIt.PluginUtils.currentUnits(await FormIt.StringConversion.StringToLinearValue((document.getElementById(catenaryCableRadiusInputID).value))).second,
-    "arcBulge": await FormIt.PluginUtils.currentUnits(await FormIt.StringConversion.StringToLinearValue((document.getElementById(catenaryCableBulgeInputID).value))).second
+        "fixtureCount": Number(document.getElementById(fixtureCountInputID).value),
+        "bulbsPerFixture": Number(document.getElementById(bulbsPerFixtureInputID).value),
+        "bulbRadius": (await FormIt.StringConversion.StringToLinearValue(document.getElementById(bulbRadiusInputID).value)).second,
+        "verticalCableOrHousingLength": (await FormIt.StringConversion.StringToLinearValue(document.getElementById(cableOrHousingHeightInputID).value)).second,
+        "verticalCableOrHousingRadius": (await FormIt.StringConversion.StringToLinearValue(document.getElementById(cableOrHousingRadiusInputID).value)).second,
+        "cableFacetCount" : Number(document.getElementById(catenaryCableFacetCountInputID).value),
+        "cableRadius": (await FormIt.StringConversion.StringToLinearValue(document.getElementById(catenaryCableRadiusInputID).value)).second,
+        "arcBulge": (await FormIt.StringConversion.StringToLinearValue(document.getElementById(catenaryCableBulgeInputID).value)).second
     }
 
     // by default, rebuild the arc so it's smoother
