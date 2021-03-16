@@ -89,49 +89,24 @@ FormItPlugins.GenerateStringLights.initializeUI = async function()
     document.body.appendChild(new FormIt.PluginUI.FooterModule().element);
 }
 
-FormItPlugins.GenerateStringLights.updateUI = function()
+FormItPlugins.GenerateStringLights.updateUI = async function()
 {
     // set the dimension inputs to use the current units
     
     // bulb radius input
-    FormIt.PluginUI.convertValueToDimensionString(
-        document.getElementById(bulbRadiusInputID).value,
-        function(result)
-        {
-            document.getElementById(bulbRadiusInputID).value = JSON.parse(result);
-        });
+    document.getElementById(bulbRadiusInputID).value = await FormIt.StringConversion.LinearValueToString((await FormIt.StringConversion.StringToLinearValue(document.getElementById(bulbRadiusInputID).value)).second);
 
     // cable/housing height input
-    FormIt.PluginUI.convertValueToDimensionString(
-        document.getElementById(cableOrHousingHeightInputID).value,
-        function(result)
-        {
-            document.getElementById(cableOrHousingHeightInputID).value = JSON.parse(result);
-        });
+    document.getElementById(cableOrHousingHeightInputID).value = await FormIt.StringConversion.LinearValueToString((await FormIt.StringConversion.StringToLinearValue(document.getElementById(cableOrHousingHeightInputID).value)).second);
 
     // cable/housing radius input
-    FormIt.PluginUI.convertValueToDimensionString(
-        document.getElementById(cableOrHousingRadiusInputID).value,
-        function(result)
-        {
-            document.getElementById(cableOrHousingRadiusInputID).value = JSON.parse(result);
-        });
+    document.getElementById(cableOrHousingRadiusInputID).value = await FormIt.StringConversion.LinearValueToString((await FormIt.StringConversion.StringToLinearValue(document.getElementById(cableOrHousingRadiusInputID).value)).second);
 
     // catenary cable radius input
-    FormIt.PluginUI.convertValueToDimensionString(
-        document.getElementById(catenaryCableRadiusInputID).value,
-        function(result)
-        {
-            document.getElementById(catenaryCableRadiusInputID).value = JSON.parse(result);
-        });
+    document.getElementById(catenaryCableRadiusInputID).value = await FormIt.StringConversion.LinearValueToString((await FormIt.StringConversion.StringToLinearValue(document.getElementById(catenaryCableRadiusInputID).value)).second);
 
     // catenary cable bulge input
-    FormIt.PluginUI.convertValueToDimensionString(
-        document.getElementById(catenaryCableBulgeInputID).value,
-        function(result)
-        {
-            document.getElementById(catenaryCableBulgeInputID).value = JSON.parse(result);
-        });
+    document.getElementById(catenaryCableBulgeInputID).value = await FormIt.StringConversion.LinearValueToString((await FormIt.StringConversion.StringToLinearValue(document.getElementById(catenaryCableBulgeInputID).value)).second);
 }
 
 /*** application code - runs asynchronously from plugin process to communicate with FormIt ***/

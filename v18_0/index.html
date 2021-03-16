@@ -17,14 +17,14 @@
             FormItInterface.SubscribeMessage("FormIt.Message.kUnitTypeChanged", async function(msg)
             {
                 var jsonMessage = JSON.parse(msg);
-                FormItPlugins.GenerateStringLights.updateUI();
+                await FormItPlugins.GenerateStringLights.updateUI();
             });
 
             // initialize the UI
             // this must be called from here, to ensure the HTML page is loaded
             // before scripts try to access the window document
             await FormItPlugins.GenerateStringLights.initializeUI();
-            FormItPlugins.GenerateStringLights.updateUI();
+            await FormItPlugins.GenerateStringLights.updateUI();
 
         }); // DOMContentLoaded
     </script>
