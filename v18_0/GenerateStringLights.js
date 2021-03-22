@@ -10,7 +10,7 @@ if (typeof FormItPlugins.GenerateStringLights == 'undefined')
 
 /*** web/UI code - runs natively in the plugin process ***/
 
-// IDs input elements that need to be referenced or updated
+// IDs of input elements that need to be referenced or updated
 let fixtureCountInputID = 'fixtureCountInput';
 let bulbsPerFixtureInputID = 'bulbsPerFixtureInput';
 let bulbRadiusInputID = 'bulbRadiusInput';
