@@ -1,0 +1,8 @@
+{
+    "PluginName": "Generate String Lights",
+    "PluginDescription": "Create architectural string lights given a selected line or arc.",
+    "PluginType": "Panel",
+    "Scripts": [],
+    "Panel": "PLUGINLOCATION/index.html",
+    "PanelIcon": "PLUGINLOCATION/img/generate_string_lights@2x.png"
+}
