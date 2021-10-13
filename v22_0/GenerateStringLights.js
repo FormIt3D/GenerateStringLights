@@ -1211,8 +1211,8 @@ FormItPlugins.GenerateStringLights.execute = async function()
     await FormIt.UndoManagement.EndState("Generate String Lights");
 
     // indicate the operation has finished
-    let message = "Successfully created string lights along the selected path.";
-    await FormIt.UI.ShowNotification(message, FormIt.NotificationType.Information, 0);
+    let message = "Generated string lights along the selected path.";
+    await FormIt.UI.ShowNotification(message, FormIt.NotificationType.Success, 0);
     console.log("\n" + message);
 
 }
